@@ -1,0 +1,15 @@
+.selected{
+    background-color: green;
+}
+
+.notSelected{
+    background-color: white;
+}
+
+.square{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 40px;
+    padding-top: 5px;
+}

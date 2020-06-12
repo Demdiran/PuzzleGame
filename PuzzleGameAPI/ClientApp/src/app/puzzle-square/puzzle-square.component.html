@@ -1,0 +1,3 @@
+<div (click)="click()" [ngClass]="isSelected ? 'selected' : 'notSelected'" *ngIf="square" #div class="square">
+    {{square.value == 0 ? "" : square.value}}
+</div>

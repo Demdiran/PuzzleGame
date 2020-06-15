@@ -2,6 +2,7 @@
 {
     public class Square
     {
+        public int Id { get; set; }
         public Square(int value)
         {
             this.Value = value;

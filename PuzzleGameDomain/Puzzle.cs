@@ -2,6 +2,7 @@
 {
     public class Puzzle
     {
+        public int Id { get; set; }
         public Square[][] Board { get; set; }
         public Puzzle(string[] puzzleStrings)
         {

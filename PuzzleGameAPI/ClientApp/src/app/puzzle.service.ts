@@ -2,19 +2,21 @@ import { Injectable } from '@angular/core';
 import { Puzzle } from './shared/models/puzzle';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Square } from './shared/models/square';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PuzzleService {
 
-  private puzzleURL = "/puzzle";
+  private puzzleURL = "/puzzle/";
 
   constructor(private http: HttpClient) { }
 
+  getPuzzle(id: number): Observable<Puzzle>{
+    return this.http.get<Puzzle>(this.puzzleURL + "getPuzzle/" + id);
+  }
 
-  getPuzzle(): Observable<Puzzle>{
-    return this.http.get<Puzzle>(this.puzzleURL);
+  getPuzzleIds(): Observable<number[]>{
+    return this.http.get<number[]>(this.puzzleURL + "getPuzzleIds");
   }
 }

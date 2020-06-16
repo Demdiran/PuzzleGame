@@ -18,14 +18,5 @@ namespace PuzzleGamePersistence
                 .ExposeConfiguration(cfg => new SchemaUpdate(cfg).Execute(false, true))
                 .BuildSessionFactory();
         }
-
-        public class SqlInterceptor : EmptyInterceptor
-        {
-            public override SqlString OnPrepareStatement(SqlString sql)
-            {
-                return base.OnPrepareStatement(sql);
-            }
-        }
-
     }
 }

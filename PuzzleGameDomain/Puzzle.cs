@@ -2,8 +2,9 @@
 {
     public class Puzzle
     {
-        public int Id { get; set; }
-        public Square[][] Board { get; set; }
+        public virtual int Id { get; set; }
+        public virtual Square[][] Board { get; set; }
+        public Puzzle(){}
         public Puzzle(string[] puzzleStrings)
         {
             var rowCount = puzzleStrings.Length;
@@ -21,7 +22,6 @@
                     else
                         row[columnIndex] = new Square(0);
                 }
-
                 Board[rowIndex] = row;
             }
         }

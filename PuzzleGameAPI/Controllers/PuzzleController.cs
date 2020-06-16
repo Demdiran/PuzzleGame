@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PuzzleGameDomain;
+using PuzzleGamePersistence;
 
 namespace PuzzleGameAPI.Controllers
 {
@@ -7,22 +8,16 @@ namespace PuzzleGameAPI.Controllers
     [Route("[controller]")]
     public class PuzzleController : ControllerBase
     {
-        private readonly Puzzle _mockPuzzle = new Puzzle(new[] {
-                                                    "----5----",
-                                                    "--9----3-",
-                                                    "---------",
-                                                    "-----1---",
-                                                    "-6--9--2-",
-                                                    "---------",
-                                                    "-------9-",
-                                                    "-9-------",
-                                                    "-4---8---"
-                                                });
+        private readonly PuzzleRepository _puzzleRepository;
+        public PuzzleController(PuzzleRepository puzzleRepository)
+        {
+            _puzzleRepository = puzzleRepository;
+        }
 
         [HttpGet]
         public Puzzle Get()
         {
-            return _mockPuzzle;
+            return _puzzleRepository.GetPuzzle();
         }
     }
 }

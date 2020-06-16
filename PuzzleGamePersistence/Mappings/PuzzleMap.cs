@@ -1,5 +1,6 @@
 ﻿using FluentNHibernate.Mapping;
 using PuzzleGameDomain;
+using PuzzleGamePersistence.CustomTypes;
 
 namespace PuzzleGamePersistence.Mappings
 {
@@ -7,10 +8,9 @@ namespace PuzzleGamePersistence.Mappings
     {
         public PuzzleMap()
         {
-            Id(x => x.Id);
-            HasMany(x => x.Board)
-                .Inverse()
-                .AsList();
+            Id(x => x.Id).GeneratedBy.Identity();
+            Map(x => x.Board)
+                .CustomType(typeof(BoardType));
             Table("Puzzle");
         }
         

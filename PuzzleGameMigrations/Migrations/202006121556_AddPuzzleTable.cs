@@ -1,4 +1,5 @@
-﻿using FluentMigrator;
+﻿using System;
+using FluentMigrator;
 
 namespace PuzzleGameMigrations.Migrations
 {
@@ -8,7 +9,8 @@ namespace PuzzleGameMigrations.Migrations
         public override void Up()
         {
             Create.Table("Puzzle")
-                .WithColumn("Id").AsInt64().PrimaryKey().Identity();
+                .WithColumn("Id").AsInt64().PrimaryKey().Identity()
+                .WithColumn("Board").AsString(int.MaxValue);
         }
 
         public override void Down()

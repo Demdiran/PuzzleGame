@@ -1,14 +1,18 @@
+using FluentNHibernate.Conventions.AcceptanceCriteria;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NHibernate;
+using PuzzleGamePersistence;
 
 namespace PuzzleGameAPI
 {
     public class Startup
     {
+        private static readonly string _connectionString = "Data Source=localhost;Initial Catalog=PuzzleGame;Integrated Security=True";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -19,6 +23,9 @@ namespace PuzzleGameAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(NHibernateSessionFactory.CreateSessionFactory(_connectionString));
+            services.AddScoped(sp => ((ISessionFactory)sp.GetService(typeof(ISessionFactory))).OpenSession());
+            services.AddScoped<PuzzleRepository>();
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

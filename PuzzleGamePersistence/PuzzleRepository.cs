@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
 using NHibernate;
 using PuzzleGameDomain;
 
@@ -11,6 +12,16 @@ namespace PuzzleGamePersistence
         public Puzzle GetPuzzle()
         {
             return Session.Query<Puzzle>().ToList()[0];
+        }
+
+        public Puzzle GetPuzzleById(int id)
+        {
+            return Session.Get<Puzzle>(id);
+        }
+
+        public IList GetPuzzleIds()
+        {
+            return Session.Query<Puzzle>().Select(x => x.Id).ToList();
         }
     }
 }

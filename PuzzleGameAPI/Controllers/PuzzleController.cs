@@ -5,8 +5,6 @@ using PuzzleGamePersistence;
 
 namespace PuzzleGameAPI.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
     public class PuzzleController : ControllerBase
     {
         private readonly PuzzleRepository _puzzleRepository;
@@ -22,14 +20,14 @@ namespace PuzzleGameAPI.Controllers
         }
 
         [HttpGet]
-        [Route("getPuzzleIds")]
+        [Route("puzzle/getPuzzleIds")]
         public IList GetPuzzleIds()
         {
             return _puzzleRepository.GetPuzzleIds();
         }
 
         [HttpGet]
-        [Route("getPuzzle")]
+        [Route("puzzle/getPuzzle/{id}")]
         public Puzzle GetPuzzleById([FromRoute] int id)
         {
             return _puzzleRepository.GetPuzzleById(id);

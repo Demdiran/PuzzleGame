@@ -5,16 +5,20 @@ import { HttpClientModule }    from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { SudokuComponent } from './sudoku/sudoku.component';
 import { PuzzleSquareComponent } from './puzzle-square/puzzle-square.component';
+import { PuzzleSelectionComponent } from './puzzle-selection/puzzle-selection.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     SudokuComponent,
-    PuzzleSquareComponent
+    PuzzleSquareComponent,
+    PuzzleSelectionComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

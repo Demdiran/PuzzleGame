@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { PuzzleService } from '../puzzle.service';
 import { Puzzle } from '../shared/models/puzzle';
 
@@ -12,14 +14,17 @@ export class SudokuComponent implements OnInit {
 
   puzzle: Puzzle;
 
-  constructor(private puzzleservice: PuzzleService) { }
+  constructor(private puzzleservice: PuzzleService, 
+        private route: ActivatedRoute, 
+        private location: Location) { }
 
   ngOnInit(): void {
     this.getPuzzle();
   }
 
   getPuzzle(){
-    this.puzzleservice.getPuzzle()
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.puzzleservice.getPuzzle(id)
       .subscribe(puzzle => this.puzzle = puzzle);
   }
 
@@ -36,4 +41,8 @@ export class SudokuComponent implements OnInit {
     }
     return style;
   };
+
+  goBack(){
+    this.location.back();
+  }
 }

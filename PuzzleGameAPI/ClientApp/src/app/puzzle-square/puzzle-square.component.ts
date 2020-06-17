@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Square } from '../shared/models/square';
-import { Console } from 'console';
 
 @Component({
   selector: 'app-puzzle-square',

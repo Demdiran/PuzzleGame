@@ -23,5 +23,10 @@ namespace PuzzleGamePersistence
         {
             return Session.Query<Puzzle>().Select(x => x.Id).ToList();
         }
+
+        public IList GetPuzzleNames()
+        {
+            return Session.Query<Puzzle>().Select(x => x.Name).ToList();
+        }
     }
 }

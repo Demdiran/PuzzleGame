@@ -17,6 +17,9 @@ td{
     padding: 0;
 }
 
-h3{
-    text-align: center;
+#name{
+    left: 50%;
+    transform: translate(-50%);
+    width: fit-content;
+    position: relative;
 }

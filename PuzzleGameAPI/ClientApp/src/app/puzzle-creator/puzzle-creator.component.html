@@ -1,0 +1,16 @@
+<button (click)="goBack()" id="Back">Back</button>
+<div *ngIf="puzzle">
+    <div id="name">
+        <label>name:
+            <input [(ngModel)]="puzzle.name" placeholder="name"/>
+        </label>
+    </div>
+    <table #board >
+        <tr *ngFor="let row of puzzle.board; index as i">
+            <td *ngFor="let square of row; index as j" [ngStyle]="setBorders(i,j)">
+                <app-puzzle-square [square]="square"></app-puzzle-square>
+            </td>
+        </tr>
+    </table>
+    <button (click)="save()">Save</button>
+</div>

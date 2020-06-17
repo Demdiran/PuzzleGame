@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, HostListener, ViewChild } from '@angular/core';
 import { Square } from '../shared/models/square';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-puzzle-square',
@@ -10,6 +11,8 @@ export class PuzzleSquareComponent implements OnInit {
   @Input() square: Square;
   @ViewChild("div") div;
   isSelected: boolean = false;
+  deselectSquareRef = this.deselectSquare.bind(this);
+  handleKeyboardEventRef = this.handleKeyboardEvent.bind(this);
 
   constructor() { }
 
@@ -18,17 +21,26 @@ export class PuzzleSquareComponent implements OnInit {
 
   click(){
     this.isSelected = !this.isSelected;
+    if(this.isSelected){
+      document.addEventListener('click', this.deselectSquareRef);
+      document.addEventListener('keypress', this.handleKeyboardEventRef);
+    }
+    else{
+      document.removeEventListener('click', this.deselectSquareRef);
+      document.removeEventListener('keypress', this.handleKeyboardEventRef);
+    }
   }
   
-  @HostListener('document:click', ['$event'])
   deselectSquare(event: MouseEvent){
-    const clickedPuzzle = this.div.nativeElement.contains(event.target);
-    if(!clickedPuzzle){
+    const clickedThisSquare = this.div.nativeElement.contains(event.target);
+    const selectingMultiple = event.ctrlKey;
+    if(!clickedThisSquare && !selectingMultiple){
       this.isSelected = false;
+      document.removeEventListener('click', this.deselectSquareRef);
+      document.removeEventListener('keypress', this.handleKeyboardEventRef);
     }
   }
 
-  @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) { 
     let key = Number(event.key);
     if(!isNaN(key)){
@@ -37,7 +49,7 @@ export class PuzzleSquareComponent implements OnInit {
   }
 
   placeNumber(number: number){
-    if(this.isSelected && !this.square.isHint){
+    if(!this.square.isHint){
       this.square.value = number;
     }
   }

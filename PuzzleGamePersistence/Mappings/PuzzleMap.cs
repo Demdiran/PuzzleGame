@@ -9,6 +9,7 @@ namespace PuzzleGamePersistence.Mappings
         public PuzzleMap()
         {
             Id(x => x.Id).GeneratedBy.Identity();
+            Map(x => x.Name);
             Map(x => x.Board)
                 .CustomType(typeof(BoardType));
             Table("Puzzle");

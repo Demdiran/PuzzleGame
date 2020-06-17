@@ -1,5 +1,5 @@
-<div>
+<div *ngIf="ids && names">
     <ul>
-        <li *ngFor="let id of ids"><a routerLink="/puzzle/{{id}}">{{id}}</a></li>
+        <li *ngFor="let name of names; index as i"><a routerLink="/puzzle/{{ids[i]}}">{{name}}</a></li>
     </ul>
 </div>

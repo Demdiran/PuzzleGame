@@ -7,16 +7,23 @@ import { PuzzleService } from '../puzzle.service';
   styleUrls: ['./puzzle-selection.component.css']
 })
 export class PuzzleSelectionComponent implements OnInit {
+  names: string[];
   ids: number[];
 
   constructor(private puzzleService: PuzzleService) { }
 
   ngOnInit(): void {
-    this.getIds();
+    this.getPuzzleIds();
+    this.getPuzzleNames();
   }
 
-  getIds(): void{
+  getPuzzleIds(): void{
     this.puzzleService.getPuzzleIds()
       .subscribe(ids => this.ids = ids);
+  }
+
+  getPuzzleNames(): void{
+    this.puzzleService.getPuzzleNames()
+      .subscribe(names => this.names = names);
   }
 }

@@ -1,8 +1,11 @@
 <button (click)="goBack()">Back</button>
-<table #board *ngIf="puzzle">
+<div *ngIf="puzzle">
+<h3>{{puzzle.name}}</h3>
+<table #board >
     <tr *ngFor="let row of puzzle.board; index as i">
         <td *ngFor="let square of row; index as j" [ngStyle]="setBorders(i,j)">
             <app-puzzle-square [square]="square"></app-puzzle-square>
         </td>
     </tr>
 </table>
+</div>

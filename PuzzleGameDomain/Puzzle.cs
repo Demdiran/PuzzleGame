@@ -3,6 +3,7 @@
     public class Puzzle
     {
         public virtual int Id { get; set; }
+        public virtual string Name { get; set; }
         public virtual Square[][] Board { get; set; }
         public Puzzle(){}
         public Puzzle(string[] puzzleStrings)

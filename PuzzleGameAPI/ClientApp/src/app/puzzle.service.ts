@@ -19,4 +19,8 @@ export class PuzzleService {
   getPuzzleIds(): Observable<number[]>{
     return this.http.get<number[]>(this.puzzleURL + "getPuzzleIds");
   }
+
+  getPuzzleNames(): Observable<string[]>{
+    return this.http.get<string[]>(this.puzzleURL + "GetPuzzleNames");
+  }
 }

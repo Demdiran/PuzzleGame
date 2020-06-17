@@ -1,6 +1,7 @@
 import { Square } from './square';
 
 export interface Puzzle{
-    Id: number;
+    id: number;
+    name: string;
     board: Square[][];
 }

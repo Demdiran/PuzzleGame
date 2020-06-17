@@ -27,6 +27,13 @@ namespace PuzzleGameAPI.Controllers
         }
 
         [HttpGet]
+        [Route("puzzle/getPuzzleNames")]
+        public IList GetPuzzleNames()
+        {
+            return _puzzleRepository.GetPuzzleNames();
+        }
+
+        [HttpGet]
         [Route("puzzle/getPuzzle/{id}")]
         public Puzzle GetPuzzleById([FromRoute] int id)
         {

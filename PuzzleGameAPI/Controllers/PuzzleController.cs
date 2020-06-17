@@ -20,24 +20,40 @@ namespace PuzzleGameAPI.Controllers
         }
 
         [HttpGet]
-        [Route("puzzle/getPuzzleIds")]
+        [Route("puzzle/GetPuzzleIds")]
         public IList GetPuzzleIds()
         {
             return _puzzleRepository.GetPuzzleIds();
         }
 
         [HttpGet]
-        [Route("puzzle/getPuzzleNames")]
+        [Route("puzzle/GetPuzzleNames")]
         public IList GetPuzzleNames()
         {
             return _puzzleRepository.GetPuzzleNames();
         }
 
         [HttpGet]
-        [Route("puzzle/getPuzzle/{id}")]
+        [Route("puzzle/GetPuzzle/{id}")]
         public Puzzle GetPuzzleById([FromRoute] int id)
         {
             return _puzzleRepository.GetPuzzleById(id);
+        }
+
+        [HttpGet]
+        [Route("puzzle/GetEmptyPuzzle")]
+        public Puzzle GetEmptyPuzzle()
+        {
+            return new Puzzle(9);
+        }
+
+        [HttpPost]
+        [Route("puzzle/SavePuzzle")]
+        public bool SavePuzzle([FromBody] Puzzle puzzle)
+        {
+            puzzle.SetHints();
+            _puzzleRepository.SaveOrUpdate(puzzle);
+            return true;
         }
     }
 }

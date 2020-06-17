@@ -23,7 +23,37 @@
                     else
                         row[columnIndex] = new Square(0);
                 }
+
                 Board[rowIndex] = row;
+            }
+        }
+
+        public Puzzle(int dimension)
+        {
+            Board = new Square[dimension][];
+            for (var rowIndex = 0; rowIndex < dimension; rowIndex++)
+            {
+                var row = new Square[dimension];
+
+                for (var columnIndex = 0; columnIndex < dimension; columnIndex++)
+                {
+                    row[columnIndex] = new Square(0);
+                }
+
+                Board[rowIndex] = row;
+            }
+
+            Name = "";
+        }
+
+        public virtual void SetHints()
+        {
+            foreach (Square[] row in Board)
+            {
+                foreach (Square square in row)
+                {
+                    square.BecomeHintIfNeeded();
+                }
             }
         }
     }

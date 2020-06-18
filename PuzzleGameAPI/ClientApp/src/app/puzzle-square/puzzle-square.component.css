@@ -1,11 +1,3 @@
-.selected{
-    background-color: green;
-}
-
-.notSelected{
-    background-color: white;
-}
-
 .square{
     width: 100%;
     height: 100%;

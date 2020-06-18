@@ -8,6 +8,7 @@ import { Square } from '../shared/models/square';
 })
 export class PuzzleSquareComponent implements OnInit {
   @Input() square: Square;
+  @Input() backgroundColor: string = "white";
   @ViewChild("div") div;
   isSelected: boolean = false;
   deselectSquareRef = this.deselectSquare.bind(this);
@@ -22,11 +23,11 @@ export class PuzzleSquareComponent implements OnInit {
     this.isSelected = !this.isSelected;
     if(this.isSelected){
       document.addEventListener('click', this.deselectSquareRef);
-      document.addEventListener('keypress', this.handleKeyboardEventRef);
+      document.addEventListener('keydown', this.handleKeyboardEventRef);
     }
     else{
       document.removeEventListener('click', this.deselectSquareRef);
-      document.removeEventListener('keypress', this.handleKeyboardEventRef);
+      document.removeEventListener('keydown', this.handleKeyboardEventRef);
     }
   }
   
@@ -36,7 +37,7 @@ export class PuzzleSquareComponent implements OnInit {
     if(!clickedThisSquare && !selectingMultiple){
       this.isSelected = false;
       document.removeEventListener('click', this.deselectSquareRef);
-      document.removeEventListener('keypress', this.handleKeyboardEventRef);
+      document.removeEventListener('keydown', this.handleKeyboardEventRef);
     }
   }
 

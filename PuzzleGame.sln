@@ -12,7 +12,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PuzzleGameDomain", "PuzzleG
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PuzzleGameMigrations", "PuzzleGameMigrations\PuzzleGameMigrations.csproj", "{51428B2B-99F3-4233-8AA2-B46BBD40F848}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PuzzleGamePersistence", "PuzzleGamePersistence\PuzzleGamePersistence.csproj", "{887F78F0-7B5C-4CCC-9BF2-C43645A1660F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PuzzleGamePersistence", "PuzzleGamePersistence\PuzzleGamePersistence.csproj", "{887F78F0-7B5C-4CCC-9BF2-C43645A1660F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PuzzleGameChecker", "PuzzleGameChecker\PuzzleGameChecker.csproj", "{FD7A282F-AA1D-4DC8-A71E-047C5AFD1A7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,10 @@ Global
 		{887F78F0-7B5C-4CCC-9BF2-C43645A1660F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{887F78F0-7B5C-4CCC-9BF2-C43645A1660F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{887F78F0-7B5C-4CCC-9BF2-C43645A1660F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD7A282F-AA1D-4DC8-A71E-047C5AFD1A7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD7A282F-AA1D-4DC8-A71E-047C5AFD1A7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD7A282F-AA1D-4DC8-A71E-047C5AFD1A7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD7A282F-AA1D-4DC8-A71E-047C5AFD1A7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

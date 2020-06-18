@@ -2,19 +2,20 @@
 using System;
 using PuzzleGameMigrations.Migrations;
 using Microsoft.Extensions.DependencyInjection;
+using System.Configuration;
 
 namespace PuzzleGameMigrations
 {
     class Program
     {
-        private static readonly string _connectionString = "Data Source=localhost;Initial Catalog=PuzzleGame;Integrated Security=True";
         static void Main(string[] args)
         {
-            DatabaseCreator.CreateDatabaseIfNotExists(_connectionString);
+            var connectionString = ConfigurationManager.ConnectionStrings["PuzzleGame"].ConnectionString;
+            DatabaseCreator.CreateDatabaseIfNotExists(connectionString);
 
             try
             {
-                var serviceProvider = CreateMigrationRunnerService(_connectionString);
+                var serviceProvider = CreateMigrationRunnerService(connectionString);
 
                 using (var scope = serviceProvider.CreateScope())
                 {

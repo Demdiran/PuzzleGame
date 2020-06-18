@@ -1,17 +1,17 @@
 ﻿using System;
+using System.Configuration;
 using System.Data.SqlClient;
 
 namespace PuzzleGameMigrations
 {
     public class DatabaseCreator
     {
-        private static readonly string _mssqlDatabaseLocation = "C:\\Program Files\\Microsoft SQL Server\\MSSQL15.MSSQLSERVER\\MSSQL\\DATA";
-        private static readonly string _mssqlDatabaseName = "PuzzleGame";
         public static void CreateDatabaseIfNotExists(string connectionString)
         {
+            var databaseName = ConfigurationManager.AppSettings["DatabaseName"];
             try
             {
-                ExecuteSql(connectionString, DatabaseCreationString(_mssqlDatabaseName));
+                ExecuteSql(connectionString, DatabaseCreationString(databaseName));
 
             }
             catch (Exception e)

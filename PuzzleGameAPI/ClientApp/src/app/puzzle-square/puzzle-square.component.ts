@@ -9,10 +9,10 @@ import { Square } from '../shared/models/square';
 export class PuzzleSquareComponent implements OnInit {
   @Input() square: Square;
   @Input() backgroundColor: string = "white";
+  @Input() isSelected: boolean = false;
   @ViewChild("div") div;
-  isSelected: boolean = false;
-  deselectSquareRef = this.deselectSquare.bind(this);
-  handleKeyboardEventRef = this.handleKeyboardEvent.bind(this);
+  deselectSquareHandlerRef = this.deselectSquareHandler.bind(this);
+  keyboardEventHandlerRef = this.keyboardEventHandler.bind(this);
 
   constructor() { }
 
@@ -20,28 +20,35 @@ export class PuzzleSquareComponent implements OnInit {
   }
 
   click(){
-    this.isSelected = !this.isSelected;
-    if(this.isSelected){
-      document.addEventListener('click', this.deselectSquareRef);
-      document.addEventListener('keydown', this.handleKeyboardEventRef);
+    if(!this.isSelected){
+      this.selectSquare();
     }
     else{
-      document.removeEventListener('click', this.deselectSquareRef);
-      document.removeEventListener('keydown', this.handleKeyboardEventRef);
-    }
-  }
-  
-  deselectSquare(event: MouseEvent){
-    const clickedThisSquare = this.div.nativeElement.contains(event.target);
-    const selectingMultiple = event.ctrlKey;
-    if(!clickedThisSquare && !selectingMultiple){
-      this.isSelected = false;
-      document.removeEventListener('click', this.deselectSquareRef);
-      document.removeEventListener('keydown', this.handleKeyboardEventRef);
+      this.deselectSquare();
     }
   }
 
-  handleKeyboardEvent(event: KeyboardEvent) { 
+  selectSquare(){
+    this.isSelected = true;
+    document.addEventListener('click', this.deselectSquareHandlerRef);
+    document.addEventListener('keydown', this.keyboardEventHandlerRef);
+  }
+
+  deselectSquare(){
+    this.isSelected = false;
+    document.removeEventListener('click', this.deselectSquareHandlerRef);
+    document.removeEventListener('keydown', this.keyboardEventHandlerRef);
+  }
+  
+  deselectSquareHandler(event: MouseEvent){
+    let element = <Element>event.target;
+    if(element.id === "checkButton") return;
+    const clickedThisSquare = this.div.nativeElement.contains(event.target);
+    const selectingMultiple = event.ctrlKey;
+    if(!clickedThisSquare && !selectingMultiple) this.deselectSquare();
+  }
+
+  keyboardEventHandler(event: KeyboardEvent) { 
     let key = Number(event.key);
     if(!isNaN(key)){
       this.placeNumber(key);  

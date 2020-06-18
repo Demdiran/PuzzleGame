@@ -7,7 +7,6 @@ using Microsoft.Extensions.Hosting;
 using NHibernate;
 using PuzzleGamePersistence;
 using System.Configuration;
-using System.Collections.Specialized;
 
 namespace PuzzleGameAPI
 {

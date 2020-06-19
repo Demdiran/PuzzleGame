@@ -1,6 +1,8 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using PuzzleGameDomain;
+using PuzzleGameDomain.Rules;
 using PuzzleGamePersistence;
 
 namespace PuzzleGameAPI.Controllers
@@ -52,6 +54,7 @@ namespace PuzzleGameAPI.Controllers
         public bool SavePuzzle([FromBody] Puzzle puzzle)
         {
             puzzle.SetHints();
+            puzzle.Rules.Add(new StandardRowRule());
             _puzzleRepository.SaveOrUpdate(puzzle);
             return true;
         }

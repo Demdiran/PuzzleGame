@@ -12,6 +12,12 @@ namespace PuzzleGamePersistence.Mappings
             Map(x => x.Name);
             Map(x => x.Board)
                 .CustomType(typeof(BoardType));
+            HasMany(x => x.Rules)
+                .Not.KeyNullable()
+                .Not.Inverse()
+                .KeyColumn("PuzzleId")
+                .Table("PuzzleRule")
+                .Cascade.All();
             Table("Puzzle");
         }
         

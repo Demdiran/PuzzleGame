@@ -1,8 +1,6 @@
 ﻿using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
-using NHibernate.SqlCommand;
-using NHibernate.Tool.hbm2ddl;
 using PuzzleGamePersistence.Mappings;
 
 namespace PuzzleGamePersistence
@@ -12,10 +10,9 @@ namespace PuzzleGamePersistence
         public static ISessionFactory CreateSessionFactory(string connectionString)
         {
             return Fluently.Configure()
-                .Database(MsSqlConfiguration.MsSql2012
+                .Database(MsSqlConfiguration.MsSql2012.ShowSql()
                     .ConnectionString(connectionString))
                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<PuzzleMap>())
-                .ExposeConfiguration(cfg => new SchemaUpdate(cfg).Execute(false, true))
                 .BuildSessionFactory();
         }
     }

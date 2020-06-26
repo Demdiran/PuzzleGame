@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using NHibernate;
 using PuzzleGamePersistence;
 using System.Configuration;
+using PuzzleGameAPI.Converters;
 
 namespace PuzzleGameAPI
 {
@@ -27,7 +28,11 @@ namespace PuzzleGameAPI
             services.AddSingleton(NHibernateSessionFactory.CreateSessionFactory(connectionString));
             services.AddScoped(sp => ((ISessionFactory)sp.GetService(typeof(ISessionFactory))).OpenSession());
             services.AddScoped<PuzzleRepository>();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new RuleConverter());
+                //options.JsonSerializerOptions.Converters.Add(new RuleListConverter());
+            });
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

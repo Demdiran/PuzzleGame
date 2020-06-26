@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using PuzzleGameDomain.Rules;
 
 namespace PuzzleGameDomain
 {
@@ -47,6 +48,8 @@ namespace PuzzleGameDomain
             }
 
             Name = "";
+            Rules.Add(new StandardRowRule());
+            Rules.Add(new StandardColumnRule());
         }
 
         public virtual void SetHints()

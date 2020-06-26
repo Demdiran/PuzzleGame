@@ -63,5 +63,23 @@ namespace PuzzleGameDomain
                 }
             }
         }
+
+        public virtual List<int> CheckRules()
+        {
+            var result = new List<int>();
+            for (int rowIndex = 0; rowIndex < 9; rowIndex++)
+            {
+                for (int columnIndex = 0; columnIndex < 9; columnIndex++)
+                {
+                    var squareBreaksARule = false;
+                    foreach (Rule rule in Rules)
+                    {
+                        squareBreaksARule |= rule.CheckSquareBreaksRule(this.Board, rowIndex, columnIndex);
+                    }
+                    if(squareBreaksARule) result.Add(rowIndex * 9 + columnIndex);
+                }
+            }
+            return result;
+        }
     }
 }

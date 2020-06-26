@@ -1,10 +1,14 @@
-﻿namespace PuzzleGameDomain
+﻿using System.Collections.Generic;
+using PuzzleGameDomain.Rules;
+
+namespace PuzzleGameDomain
 {
     public class Puzzle
     {
         public virtual int Id { get; set; }
         public virtual string Name { get; set; }
         public virtual Square[][] Board { get; set; }
+        public virtual IList<Rule> Rules { get; set; } = new List<Rule>();
         public Puzzle(){}
         public Puzzle(string[] puzzleStrings)
         {
@@ -44,6 +48,9 @@
             }
 
             Name = "";
+            Rules.Add(new StandardRowRule());
+            Rules.Add(new StandardColumnRule());
+            Rules.Add(new StandardBoxRule());
         }
 
         public virtual void SetHints()
@@ -55,6 +62,24 @@
                     square.BecomeHintIfNeeded();
                 }
             }
+        }
+
+        public virtual List<int> CheckRules()
+        {
+            var result = new List<int>();
+            for (int rowIndex = 0; rowIndex < 9; rowIndex++)
+            {
+                for (int columnIndex = 0; columnIndex < 9; columnIndex++)
+                {
+                    var squareBreaksARule = false;
+                    foreach (Rule rule in Rules)
+                    {
+                        squareBreaksARule |= rule.CheckSquareBreaksRule(this.Board, rowIndex, columnIndex);
+                    }
+                    if(squareBreaksARule) result.Add(rowIndex * 9 + columnIndex);
+                }
+            }
+            return result;
         }
     }
 }

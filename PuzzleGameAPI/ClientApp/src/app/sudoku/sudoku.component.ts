@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { PuzzleService } from '../puzzle.service';
 import { Puzzle } from '../shared/models/puzzle';
+import { PuzzleSquareComponent } from '../puzzle-square/puzzle-square.component';
+import { CheckerService } from '../checker.service';
 
 @Component({
   selector: 'app-sudoku',
@@ -11,10 +13,12 @@ import { Puzzle } from '../shared/models/puzzle';
 })
 export class SudokuComponent implements OnInit {
   @ViewChild("board") board;
+  @ViewChildren("puzzleSquare") squareComponents: QueryList<PuzzleSquareComponent>;
 
   puzzle: Puzzle;
 
-  constructor(private puzzleservice: PuzzleService, 
+  constructor(private puzzleservice: PuzzleService,
+        private checkerservice: CheckerService,
         private route: ActivatedRoute, 
         private location: Location) { }
 
@@ -44,5 +48,20 @@ export class SudokuComponent implements OnInit {
 
   goBack(){
     this.location.back();
+  }
+
+  Check(){
+    this.checkerservice.checkPuzzle(this.puzzle)
+      .subscribe(numbers => this.selectSquares(numbers))
+  }
+
+  selectSquares(numbers: number[]){
+    let squares = this.squareComponents.toArray();
+    squares.forEach(square => {
+      square.deselectSquare();
+    })
+    numbers.forEach(number => {
+      squares[number].selectSquare();
+    })
   }
 }

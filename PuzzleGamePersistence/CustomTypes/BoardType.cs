@@ -16,7 +16,7 @@ namespace PuzzleGamePersistence.CustomTypes
 
         public Type ReturnedType => typeof(Square[][]);
 
-        public bool Equals(object x, object y)
+        public new bool Equals(object x, object y)
         {
             if (x == null) return false;
             return x.Equals(y);

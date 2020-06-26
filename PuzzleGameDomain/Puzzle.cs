@@ -50,6 +50,7 @@ namespace PuzzleGameDomain
             Name = "";
             Rules.Add(new StandardRowRule());
             Rules.Add(new StandardColumnRule());
+            Rules.Add(new StandardBoxRule());
         }
 
         public virtual void SetHints()

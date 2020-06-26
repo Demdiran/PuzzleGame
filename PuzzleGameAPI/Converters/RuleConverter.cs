@@ -33,6 +33,7 @@ namespace PuzzleGameAPI.Converters
             {
                 "PuzzleGameDomain.Rules.StandardRowRule" => new StandardRowRule(),
                 "PuzzleGameDomain.Rules.StandardColumnRule" => new StandardColumnRule(),
+                "PuzzleGameDomain.Rules.StandardBoxRule" => new StandardBoxRule(),
                 _ => throw new NotSupportedException(type + " is not a supported rule type."),
             };
             result.Id = id;

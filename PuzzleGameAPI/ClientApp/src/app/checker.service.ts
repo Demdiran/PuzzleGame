@@ -8,11 +8,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CheckerService {
 
-  private checkerURL = "/checker/";
+  private puzzleURL = "/puzzle/";
 
   constructor(private http: HttpClient) { }
 
   checkPuzzle(puzzle: Puzzle): Observable<number[]>{
-    return of([0,1,5,8,9,15,22]);
+    return this.http.post<number[]>(this.puzzleURL + "CheckPuzzle", puzzle);
   }
 }

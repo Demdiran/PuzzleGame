@@ -51,11 +51,18 @@ namespace PuzzleGameAPI.Controllers
 
         [HttpPost]
         [Route("puzzle/SavePuzzle")]
-        public bool SavePuzzle([FromBody]Puzzle puzzle)
+        public bool SavePuzzle([FromBody] Puzzle puzzle)
         {
             puzzle.SetHints();
             _puzzleRepository.SaveOrUpdate(puzzle);
             return true;
+        }
+
+        [HttpPost]
+        [Route("puzzle/CheckPuzzle")]
+        public List<int> CheckPuzzle([FromBody] Puzzle puzzle)
+        {
+            return puzzle.CheckRules();
         }
     }
 }
